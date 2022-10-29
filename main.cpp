@@ -3450,22 +3450,6 @@ void Execute_User_input() {
 
 void Execute_Parser() {
   // Next token correct line
-  Token token = Retrieve_Token() ;
-  if ( token.m_value == "" )
-    return ;
-  else if ( token.m_row == g_TokenList[g_TokenList.size()-1].m_row ) {
-    g_row = 1, g_column = 0 ;
-    token.m_row = g_row ;
-    token.m_column = g_column ;
-  } // if
-  else {
-    g_row = token.m_row - g_TokenList[g_TokenList.size()-1].m_row ;
-    token.m_row = g_row ;
-  } // else
-
-  g_TokenBuffer.insert( g_TokenBuffer.begin(), token ) ;
-
-  cout << "> " ;
   try {
     Execute_User_input() ;
   }  catch( const char * msg ) {
@@ -3485,6 +3469,7 @@ int main() {
   g_IdentTable.push_back( global_IdentTable ) ;
 
   cout << "Our-C running ..." << endl ;
+  cout << "> " ;
   Token token = Retrieve_Token() ;
   while ( token.m_value != "" ) {
     try {
@@ -3496,6 +3481,7 @@ int main() {
       cout << "> Line " << token.m_row << " : " << msg << " \'" << token.m_value << "\'" << endl ;
     } // catch
 
+    cout << "> " ;
     token = Retrieve_Token() ;
   } // while
 } // main()
